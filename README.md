@@ -2,17 +2,13 @@
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-> Agent 出现以后，神经网络和符号系统怎么接在一起学习。按接口分类，不按应用领域分类。
+> 神经网络和符号对象放在一起学：逻辑、程序、证明、PDDL、图谱路径、技能库、引理库。
 
-符号对象指逻辑公式、程序、证明、PDDL、图谱上的关系路径，以及技能库或引理库。只有思维链、或者调用了工具但没有这些对象的工作，不收。
+分三节，依据是 Yang 等人 IJCAI 2025 的综述（[论文](https://arxiv.org/abs/2508.13678)，[论文表](https://github.com/LAMDA-NeSy/Awesome-LLM-Reasoning-with-NeSy)）。
 
-目录按 Yang 等人 IJCAI 2025 综述的三条技术路线来排（[论文](https://arxiv.org/abs/2508.13678)，[论文表](https://github.com/LAMDA-NeSy/Awesome-LLM-Reasoning-with-NeSy)）：
-
-1. **符号到模型。** 符号系统提供数据或教师信号，模型把它们学进参数。推理时可以不再调用原来的求解器。
-2. **模型到符号。** 模型负责写成逻辑、程序或证明，外部系统负责执行。
-3. **两边一起。** 用符号当中间表示、把符号层放进计算图，或把求解器的对错当作训练信号。
-
-Colelough 和 Regli 的综述是按研究主题分的：知识表示、学习与推理、逻辑、可解释性、元认知。一篇论文经常跨好几类，不适合当目录。证明、规划、知识图谱和机器人如果接口相同，就放在同一节。2024 年以前只留后面还在用的几个系统。
+1. **符号到模型。** 符号系统提供数据或教师信号，模型学进参数。
+2. **模型到符号。** 模型写成逻辑、程序或证明，外部系统执行。
+3. **两边一起。** 符号留在计算图里，或求解器的对错进入训练。
 
 ## 目录
 
@@ -29,26 +25,26 @@ Colelough 和 Regli 的综述是按研究主题分的：知识表示、学习与
 - [Neuro-Symbolic Artificial Intelligence: Towards Improving the Reasoning Abilities of Large Language Models](https://arxiv.org/abs/2508.13678) — 本清单的分类来源。符号到 LLM、LLM 到符号、两边一起。Yang et al., IJCAI 2025.
 - [Neuro-Symbolic AI in 2024: A Systematic Review](https://arxiv.org/abs/2501.05435) — 按知识表示、学习与推理、逻辑、可解释性、元认知统计 2020–2024 的工作。学习与推理最多，元认知很少。Colelough and Regli, 2025.
 - [Converging Paradigms: The Synergy of Symbolic and Connectionist AI in LLM-Empowered Autonomous Agents](https://arxiv.org/abs/2407.08516) — 讨论语言智能体里神经网络、工作流和符号约束各管哪一段。Xiong et al., 2024.
-- [A Survey on Symbolic Knowledge Distillation of Large Language Models](https://arxiv.org/abs/2408.10210) — 方向相反：把模型里的知识抽成符号，不是写进权重。Acharya, Velasquez, and Song, 2024.
+- [A Survey on Symbolic Knowledge Distillation of Large Language Models](https://arxiv.org/abs/2408.10210) — 从模型里抽出符号结构。Acharya, Velasquez, and Song, 2024.
 - [Neuro-Symbolic Agents for Regulated Process Automation: Challenges and Research Agenda](https://arxiv.org/abs/2606.13405) — 受监管流程里，符号层要能审计。Rombach et al., 2026.
 
 ## 符号到模型
 
-符号系统当老师。学完以后，有的模型自己答，有的还把求解器留在测试时做检查。
+符号系统提供教师信号，模型学进参数。
 
 ### 写进参数
 
-推理时不再调用教师。符号知识或显式步骤在训练中被撤掉。
+训练时看符号知识或显式步骤，推理时只看问题。
 
 - [SKIntern: Internalizing Symbolic Knowledge for Distilling Better CoT Capabilities into Small Language Models](https://arxiv.org/abs/2409.13183) — 先把符号知识摘要和示例放进提示，再按课程删掉，小模型只看问题也能写出推理。Liao, He, Hao et al., COLING 2025. [代码](https://github.com/Xnhyacinth/SKIntern)
-- [From Explicit CoT to Implicit CoT: Learning to Internalize CoT Step by Step](https://arxiv.org/abs/2405.14838) — 逐步删掉思维链 token，把中间步骤吸进隐状态。内化的是推理步骤，不是逻辑语言。Deng, Choi, and Shieber, 2024. [代码](https://github.com/da03/Internalize_CoT_Step_by_Step)
+- [From Explicit CoT to Implicit CoT: Learning to Internalize CoT Step by Step](https://arxiv.org/abs/2405.14838) — 逐步去掉思维链 token，中间步骤进入隐状态。Deng, Choi, and Shieber, 2024. [代码](https://github.com/da03/Internalize_CoT_Step_by_Step)
 - [Neural-Symbolic Collaborative Distillation: Advancing Small Language Models for Complex Reasoning Tasks](https://arxiv.org/abs/2409.13203) — 常见推理进参数，稀缺知识仍放在外部知识库里检索。Liao, He, Xu et al., AAAI 2025. [代码](https://github.com/Xnhyacinth/NesyCD)
 - [Scaling Neuro-symbolic Problem Solving: Solver-Free Learning of Constraints and Objectives](https://arxiv.org/abs/2508.20978) — 训练时不接求解器，直接学组合问题的约束和目标。Defresne, Gambardella, and Barbe, 2025.
-- [Transformers as Soft Reasoners over Language](https://arxiv.org/abs/2002.05867) — 这条线较早的结果。用符号生成的规则数据训练后，Transformer 自己做多步推理。Clark, Tafjord, and Richardson, 2020.
+- [Transformers as Soft Reasoners over Language](https://arxiv.org/abs/2002.05867) — 用符号生成的规则数据训练，Transformer 自己做多步推理。Clark, Tafjord, and Richardson, 2020.
 
 ### 模仿符号轨迹
 
-训练数据来自符号引擎。测试时引擎还在的，学进去的是提议，不是检验。
+训练轨迹来自符号引擎。测试时引擎负责检查。
 
 - [Solving olympiad geometry without human demonstrations](https://doi.org/10.1038/s41586-023-06747-5) — AlphaGeometry。语言模型在合成证明上训练，测试时仍把辅助构造交给符号演绎引擎。Trinh et al., Nature 2024. [代码](https://github.com/google-deepmind/alphageometry)
 - [Gold-medalist Performance in Solving Olympiad Geometry with AlphaGeometry2](https://arxiv.org/abs/2502.03544) — 扩大形式语言和搜索。Chervonyi, Trinh, Olšák et al., 2025. [代码](https://github.com/google-deepmind/alphageometry2)
@@ -59,7 +55,7 @@ Colelough 和 Regli 的综述是按研究主题分的：知识表示、学习与
 
 ## 模型到符号
 
-模型只负责翻译或提出候选。算出来的那一步在求解器、解释器或搜索过程里。
+模型写成逻辑、程序或证明，求解器、解释器或搜索过程负责算出结果。
 
 ### 交给求解器
 
@@ -83,9 +79,9 @@ Colelough 和 Regli 的综述是按研究主题分的：知识表示、学习与
 
 ### 交给程序
 
-- [Forethought: Verifiable Reasoning from Neurosymbolic Primitive Programming](https://arxiv.org/abs/2607.04096) — 用神经符号原语写可执行的推理，而不是把工具结果堆在上下文里。Bhat, Vaghasiya, and Gonzalez, 2026.
+- [Forethought: Verifiable Reasoning from Neurosymbolic Primitive Programming](https://arxiv.org/abs/2607.04096) — 用神经符号原语写可执行的推理。Bhat, Vaghasiya, and Gonzalez, 2026.
 - [IVIE: A Neuro-symbolic Approach to Incremental and Validated Generation of Interactive Fiction Worlds](https://arxiv.org/abs/2606.13348) — 生成交给模型，世界是否自洽交给符号检查。Vaucher et al., 2026.
-- [VeriThoughts: Enabling Automated Verilog Code Generation using Reasoning and Formal Verification](https://arxiv.org/abs/2505.20302) — 生成 Verilog，形式验证决定收不收。Yubeaton, Nakkab et al., NeurIPS 2025.
+- [VeriThoughts: Enabling Automated Verilog Code Generation using Reasoning and Formal Verification](https://arxiv.org/abs/2505.20302) — 生成 Verilog，由形式验证决定是否采纳。Yubeaton, Nakkab et al., NeurIPS 2025.
 - [VADAOrchestra: Neurosymbolic Orchestration of Adaptive Reasoning Workflows](https://arxiv.org/abs/2606.22485) — 工作流可以改，执行记录要能审计。Baldazzi et al., 2026.
 - [NeSyPr: Neurosymbolic Proceduralization For Efficient Embodied Reasoning](https://arxiv.org/abs/2510.19429) — 把具身推理写成过程，少做逐步的语言搜索。Choi, Kim et al., NeurIPS 2025.
 - [Towards Reliable Code-as-Policies: A Neuro-Symbolic Framework for Embodied Task Planning](https://arxiv.org/abs/2510.21302) — 生成的控制代码带上可检查的符号约束。Ahn, Choi et al., NeurIPS 2025.
@@ -102,7 +98,7 @@ Think-on-Graph（2023）和 Reasoning on Graphs（2023）是这一节的前身�
 
 ## 两边一起
 
-符号部分留在训练或推理回路里，不只是事前造数据、也不只是事后调用一次。
+符号层留在训练或推理过程里。
 
 ### 符号当中间表示
 
@@ -110,7 +106,7 @@ Think-on-Graph（2023）和 Reasoning on Graphs（2023）是这一节的前身�
 
 ### 可微符号层
 
-逻辑或程序在计算图里，梯度和符号约束一起走。2024 年以前的 ∂ILP、SATNet、Logic Tensor Networks、LNN、PyReason 不再逐条列。
+逻辑或程序在计算图里，梯度和符号约束一起走。
 
 - [DeepProbLog: Neural Probabilistic Logic Programming](https://arxiv.org/abs/1805.10872) — 神经网络作为概率逻辑程序里的谓词。Manhaeve et al., 2018. [代码](https://github.com/ML-KULeuven/deepproblog)
 - [The Neuro-Symbolic Concept Learner](https://arxiv.org/abs/1904.12584) — 从图像、问题和答案里一起学视觉概念和符号程序。Mao et al., 2019.
@@ -119,11 +115,11 @@ Think-on-Graph（2023）和 Reasoning on Graphs（2023）是这一节的前身�
 - [NeurASP: Embracing Neural Networks into Answer Set Programming](https://arxiv.org/abs/2307.07700) — 网络给出概率事实，ASP 组合约束。Yang et al., 2023.
 - [The DeepLog Neurosymbolic Machine](https://arxiv.org/abs/2508.13697) — 用代数电路把多种逻辑和神经模块接到 GPU 上。Derkinderen et al., 2025. [代码](https://github.com/ML-KULeuven/deeplog)
 - [DeepSWIP: Quotient-WMC Counterfactuals for Neural Probabilistic Logic Programs](https://arxiv.org/abs/2606.20526) — 给 DeepProbLog 补反事实语义。Habib, Belle, and He, 2026.
-- [Differentiate the Evaluator, Not the Program: An Efficient Runtime Representation for Neuro-Symbolic Learning](https://arxiv.org/abs/2607.03574) — 程序搜索里可微的是评估器，不是每一条候选程序。Sheneman, 2026.
+- [Differentiate the Evaluator, Not the Program: An Efficient Runtime Representation for Neuro-Symbolic Learning](https://arxiv.org/abs/2607.03574) — 程序搜索里，梯度走评估器。Sheneman, 2026.
 
 ### 符号反馈
 
-求解器、解释器或环境给出对错，用来更新策略、技能或引理。检验一般还在外面。
+求解器、解释器或环境的对错，用来更新策略、技能或引理。
 
 - [Olympiad-level formal mathematical reasoning with reinforcement learning](https://doi.org/10.1038/s41586-025-09833-y) — AlphaProof。Lean 里的强化学习。Hubert et al., Nature 2025.
 - [Mathematical discoveries from program search with large language models](https://doi.org/10.1038/s41586-023-06924-6) — FunSearch。模型提程序，评估器做选择。Romera-Paredes et al., Nature 2024. [代码](https://github.com/google-deepmind/funsearch)
@@ -141,11 +137,9 @@ Think-on-Graph（2023）和 Reasoning on Graphs（2023）是这一节的前身�
 - [MINT: Minimal Information Neuro-Symbolic Tree for Objective-Driven Knowledge-Gap Reasoning and Active Elicitation](https://arxiv.org/abs/2602.05048) — 用神经符号树标出还缺的信息，再去问。Fang, Imani et al., ICML 2026.
 - [Influence-Guided Symbolic Regression: Scientific Discovery via LLM-Driven Equation Search with Granular Feedback](https://icml.cc/virtual/2026/poster/60987) — 方程搜索用细粒度反馈往下走。ICML 2026.
 - [Deliberate Evolution for Sample-Efficient Symbolic Regression with LLM](https://icml.cc/virtual/2026/poster/66263) — 符号回归里的进化搜索。ICML 2026.
-- [LLM Library Learning Fails: A LEGO-Prover Case Study](https://arxiv.org/abs/2504.03048) — 引理库变长，不等于这些引理被用上。需要和同等搜索预算比。Berlot-Attwell, Rudzicz, and Si, 2025.
+- [LLM Library Learning Fails: A LEGO-Prover Case Study](https://arxiv.org/abs/2504.03048) — 对齐搜索预算之后，检查引理库是否真被复用。Berlot-Attwell, Rudzicz, and Si, 2025.
 
 ## 基准
-
-2024 年以前仍被引用的 ProofWriter、FOLIO、PrOntoQA、miniF2F、ARC、PlanBench、CLEVR 不逐条列。
 
 - [PutnamBench: Evaluating Neural Theorem-Provers on the Putnam Mathematical Competition](https://arxiv.org/abs/2407.11214) — Putnam 的形式化评测。Tsoukalas, Lee, Jennings et al., 2024.
 - [GSM-Symbolic: Understanding the Limitations of Mathematical Reasoning in Large Language Models](https://arxiv.org/abs/2410.05229) — 用符号模板改数学题，看模型是记住了题还是会算。Mirzadeh et al., 2024.
@@ -153,7 +147,7 @@ Think-on-Graph（2023）和 Reasoning on Graphs（2023）是这一节的前身�
 - [Socrates or Smartypants: Testing Logic Reasoning Capabilities of Large Language Models with Logic Programming-Based Test Oracles](https://ojs.aaai.org/index.php/AAAI/article/view/39021) — 用逻辑程序当测试预言。AAAI 2026.
 - [QMFOL: Benchmarking Large Language Model Reasoning via Quantifiable Monadic First-Order Logic Test Case Generation](https://arxiv.org/abs/2606.20227) — 一阶逻辑测试用例。Zheng et al., 2026.
 - [Evaluating the Robustness of Proof Autoformalization in Lean 4](https://arxiv.org/abs/2606.14867) — 形式化在扰动下还成不成立。Gui et al., 2026.
-- [FormalRx: Rectify and eXamine Semantic Failures in Autoformalization](https://arxiv.org/abs/2607.04655) — 形式化错在哪里，而不是只给一个对错。Wang, Huang, Wan, and Zhu, 2026.
+- [FormalRx: Rectify and eXamine Semantic Failures in Autoformalization](https://arxiv.org/abs/2607.04655) — 定位自动形式化里的语义错误。Wang, Huang, Wan, and Zhu, 2026.
 - [Faults in Our Formal Benchmarking: Dataset Defects and Evaluation Failures in Lean Theorem Proving](https://arxiv.org/abs/2606.29493) — 形式化评测数据本身的问题。Ammanamanchi et al., 2026. [会议页](https://icml.cc/virtual/2026/poster/62980)
 - [The Signal-Coverage Matrix: Stratifying Type and Semantic Errors in Statement Autoformalization](https://arxiv.org/abs/2606.28013) — 把形式化错误分成类型错误和语义错误。Dai et al., 2026.
 - [NL2AGBench: Benchmarking LLM Auto-Formalization for AlphaGeometry](https://arxiv.org/abs/2608.28481) — 几何题能不能写成 AlphaGeometry 的语言。Xiao, Song, and Hu, 2026.
@@ -162,15 +156,13 @@ Think-on-Graph（2023）和 Reasoning on Graphs（2023）是这一节的前身�
 
 ## 其他清单
 
-2024 年以前的神经符号论文，上面只留了接口，其余在这几份清单里：
-
-- [Awesome-LLM-Reasoning-with-NeSy](https://github.com/LAMDA-NeSy/Awesome-LLM-Reasoning-with-NeSy) — 和 Yang 等人综述配套的论文表，分类和这里一致。
+- [Awesome-LLM-Reasoning-with-NeSy](https://github.com/LAMDA-NeSy/Awesome-LLM-Reasoning-with-NeSy) — 和 Yang 等人综述配套的论文表。
 - [awesome-deeplogic](https://github.com/ccclyu/awesome-deeplogic) — 逻辑怎么进神经网络，偏 NLP。
 - [awesome-neurosymbolic-ai](https://github.com/sciknoworg/awesome-neurosymbolic-ai) — 神经符号评测。
 
 ## 贡献
 
-补 2024 年以后、能放进上面某一条技术路线的工作。格式见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+格式见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ## 许可
 
