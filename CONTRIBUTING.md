@@ -1,29 +1,29 @@
-# 贡献
+# Contributing
 
-条目需要有逻辑公式、程序、证明、PDDL、图谱路径、技能库或引理库，并且神经网络参与提出、翻译、模仿或更新它。
+An entry needs a symbolic object: a logical formula, a program, a proof, a PDDL operator, a path on a knowledge graph, a skill library, or a lemma library. A neural model has to propose it, translate it, imitate it, or update it.
 
-放进 README 已有的三节之一：
+Place it in one of the three sections already in the README:
 
-1. 符号到模型：符号系统提供数据或教师信号，知识进参数。
-2. 模型到符号：模型写成符号对象，外部系统执行。
-3. 两边一起：符号留在计算图里，或求解器反馈进入训练。
+1. Symbolic to model: a symbolic system supplies data or a teacher signal, and the knowledge goes into the parameters.
+2. Model to symbolic: the model writes the symbolic object, and an external system runs it.
+3. Joint training: the symbolic layer stays in the computation graph, or solver feedback enters training.
 
-2024 年以前的系统，限于后面的工作还在调用的那些。链接要能打开论文页面。
+Systems from before 2024 are limited to ones that later work still calls. The link should open the paper.
 
-## 格式
+## Format
 
 ```markdown
-- [论文标题](https://arxiv.org/abs/XXXX.XXXXX) — 一句话，说明符号对象是什么、学习或执行发生在哪里。作者 et al., 年份. [Code](https://github.com/org/repo)
+- [Paper title](https://arxiv.org/abs/XXXX.XXXXX) — One sentence on where the symbolic object sits and where learning or execution happens. Author et al., Year. [Code](https://github.com/org/repo)
 ```
 
-- 标题用论文原标题。
-- 链接优先 arXiv 或 DOI。代码链接只在仓库真实存在时加上。
-- 一句话写清符号对象在哪里起作用。
-- 中文说明，论文标题保持英文。
-- 放进已有小节。
+- Use the paper's title.
+- Prefer an arXiv or DOI link. Add a code link only when the repository exists.
+- One sentence on where the symbolic object does the work.
+- English prose. Keep the paper title in its original language.
+- Use an existing section.
 
-## 提交流程
+## Pull requests
 
-1. 一个 pull request 只加一组相关工作。
-2. 写明放在哪一节，以及推理时求解器是否还在。
-3. 只提交清单文本，不提交论文 PDF 或数据包。
+1. One pull request covers one group of related papers.
+2. Name the section, and say whether the solver is still present at inference.
+3. Submit list text only. Do not commit paper PDFs or data dumps.
