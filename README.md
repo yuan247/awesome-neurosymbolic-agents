@@ -76,6 +76,7 @@ The model writes logic, a program, or a proof. A solver, an interpreter, or a se
 - [DecoVer: A Decompose-and-Verify Neuro-Symbolic Framework for Embodied Task Planning with BC+](https://icml.cc/virtual/2026/poster/63653) — Splits a plan, then checks the pieces in a symbolic layer. ICML 2026.
 - [APOLLO: Automated LLM and Lean Collaboration for Advanced Formal Reasoning](https://arxiv.org/abs/2505.05758) — An LLM and Lean pass the problem back and forth. Ospanov, Farnia et al., NeurIPS 2025.
 - [LeanDojo: Theorem Proving with Retrieval-Augmented Language Models](https://arxiv.org/abs/2306.15626) — A Lean interaction environment and a retrieval prover. Later proof agents still train on this data. Yang, Swope, Gu et al., 2023. [Code](https://github.com/lean-dojo/LeanDojo)
+- [OptimAI: Optimization from Natural Language Using LLM-Powered AI Agents](https://arxiv.org/abs/2504.16918) — Agents turn a word problem into a mathematical optimization model and solver code. The solver returns the answer, and a code critic checks each run. Thind, Sun, Liang, and Yang, 2025.
 
 ### Programs
 
@@ -86,6 +87,7 @@ The model writes logic, a program, or a proof. A solver, an interpreter, or a se
 - [NeSyPr: Neurosymbolic Proceduralization For Efficient Embodied Reasoning](https://arxiv.org/abs/2510.19429) — Turns embodied reasoning into a procedure. Choi, Kim et al., NeurIPS 2025.
 - [Towards Reliable Code-as-Policies: A Neuro-Symbolic Framework for Embodied Task Planning](https://arxiv.org/abs/2510.21302) — Generated control code carries symbolic constraints that can be checked. Ahn, Choi et al., NeurIPS 2025.
 - [Neuro-Symbolic Drive: Rule-Grounded Faithful Reasoning for Driving VLAs](https://arxiv.org/abs/2606.23938) — Driving rationales are grounded in rules, so they line up with the actions. Gao, Huang, Lu, and Zhang, 2026.
+- [AutoNumerics: An Autonomous, PDE-Agnostic Multi-Agent Pipeline for Scientific Computing](https://arxiv.org/abs/2602.17607) — The model writes a classical numerical PDE solver as a program. The program runs, and its residual decides whether to keep the solver or start over. Du, Sun, and Yang, 2026. [Code](https://github.com/Daviddjddu/Autonumerics)
 
 ### Search
 
@@ -93,6 +95,7 @@ The model writes logic, a program, or a proof. A solver, an interpreter, or a se
 - [CLAUSE: Agentic Neuro-Symbolic Knowledge Graph Reasoning via Dynamic Learnable Context Engineering](https://arxiv.org/abs/2509.21035) — Search on a knowledge graph, with a context that is itself learned. Zhao, Dai et al., ICLR 2026.
 - [KARMA: Knowledge graph-based Automated Reasoning Materialization and Alignment](https://arxiv.org/abs/2607.03166) — Materializes the result of graph reasoning and aligns it. Choi et al., 2026.
 - [Language models guide symbolic equation discovery by controlling search](https://arxiv.org/abs/2607.04156) — The model controls a symbolic equation search. 2026.
+- [AutoSR: Automatic Symbolic Regression by Searching Research States](https://arxiv.org/abs/2608.16876) — Each candidate equation sits in a research state with its motivation, probes, failed attempts, and review. LLM proposers and reviewers grow these states in a tree search. Zhang, Sun, Ren et al., 2026. [Code](https://github.com/AutoResearch-Factory/AutoSR)
 
 Think-on-Graph (2023) and Reasoning on Graphs (2023) are the earlier systems in this section. [ToG code](https://github.com/GasolSun36/ToG). [RoG code](https://github.com/RManLuo/reasoning-on-graphs).
 
